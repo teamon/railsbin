@@ -1,0 +1,2 @@
+variable :DOCKER_HOST,      :string
+variable :DOCKER_CERT_PATH, :string
