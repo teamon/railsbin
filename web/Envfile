@@ -1,1 +1,4 @@
 enable_defaults! { %w(development test).include?(ENV['RACK_ENV']) }
+
+variable :GITHUB_KEY,     :string, default: ""
+variable :GITHUB_SECRET,  :string, default: ""

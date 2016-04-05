@@ -1,0 +1,8 @@
+.row
+  .column
+    - if user_signed_in?
+      | Hello #{current_user.name}
+      a< href=sign_out_path Sign out
+    - else
+      a.button href="/auth/github" Sign in with GitHub
+
