@@ -1,0 +1,12 @@
+p#notice = notice
+
+
+h3= @gist.name
+| by #{@gist.user.name}
+
+pre
+  code= @gist.content
+
+= link_to 'Edit', edit_gist_path(@gist)
+'|
+= link_to 'Back', gists_path
