@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405223136) do
+ActiveRecord::Schema.define(version: 20160405223356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "containers", force: :cascade do |t|
+    t.string   "cid"
+    t.integer  "port"
+    t.string   "state"
+    t.integer  "host_id"
+    t.integer  "user_id"
+    t.integer  "gist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "containers", ["gist_id"], name: "index_containers_on_gist_id", using: :btree
+  add_index "containers", ["host_id"], name: "index_containers_on_host_id", using: :btree
+  add_index "containers", ["user_id"], name: "index_containers_on_user_id", using: :btree
 
   create_table "gists", force: :cascade do |t|
     t.string   "name"
@@ -40,5 +55,8 @@ ActiveRecord::Schema.define(version: 20160405223136) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "containers", "gists"
+  add_foreign_key "containers", "hosts"
+  add_foreign_key "containers", "users"
   add_foreign_key "gists", "users"
 end

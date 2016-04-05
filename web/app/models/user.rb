@@ -12,6 +12,7 @@
 
 class User < ActiveRecord::Base
   has_many :gists
+  has_many :containers
 
   validates :uid, presence: true, uniqueness: true
 
