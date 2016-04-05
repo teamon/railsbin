@@ -1,0 +1,1 @@
+enable_defaults! { %w(development test).include?(ENV['RACK_ENV']) }
