@@ -9,6 +9,10 @@ gem 'envied'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# communication
+gem 'faraday',            '~> 0.9.0'
+gem 'faraday_middleware'
+
 group :development, :test do
   # debugging
   gem 'pry-rails'
