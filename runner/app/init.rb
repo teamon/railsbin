@@ -1,3 +1,8 @@
+# require gems
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require :default, ENV['RACK_ENV']
+
 # configure environment
 ENVied.require
 
