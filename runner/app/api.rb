@@ -1,5 +1,3 @@
-require "init"
-
 module Runner
   AppFailedToStart = Class.new(StandardError)
 
@@ -8,7 +6,9 @@ module Runner
     format :json
     prefix :api
 
-    rescue_from Docker::Error::NotFoundError
+    rescue_from Docker::Error::NotFoundError do |e|
+      error!({error: e.class.name}, 404)
+    end
 
     rescue_from AppFailedToStart do |e|
       error!({error: e.class.name}, 422)
@@ -19,11 +19,6 @@ module Runner
     end
 
     resource :containers do
-      get ":id" do
-        container = Docker::Container.get(params[:id])
-        container.json
-      end
-
       params do
         requires :main
         optional :gemfile
@@ -68,6 +63,20 @@ module Runner
           id:     container.id,
           ports:  Hash[ports_mapping.map {|k,v| [k.split("/").first, v.first["HostPort"]] }]
         }
+      end
+
+      segment ":id" do
+        get do
+          container = Docker::Container.get(params[:id])
+          container.json
+        end
+
+        post :stop do
+          container = Docker::Container.get(params[:id])
+          container.stop
+
+          body false
+        end
       end
     end
   end
