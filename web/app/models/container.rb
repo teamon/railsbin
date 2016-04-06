@@ -25,4 +25,12 @@ class Container < ActiveRecord::Base
   belongs_to :gist
 
   validates :cid, :port, :state, :host, :user, :gist, presence: true
+
+  def short_cid
+    cid[0..9]
+  end
+
+  def address
+    "http://#{host.address}:#{port}"
+  end
 end

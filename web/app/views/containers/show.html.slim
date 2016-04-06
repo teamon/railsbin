@@ -8,15 +8,15 @@ p
   = @container.port
 p
   strong Host:
-  = @container.host
+  = @container.host.address
 p
   strong User:
-  = @container.user
+  = @container.user.name
 p
   strong Gist:
-  = @container.gist
+  = @container.gist.name
 p
-  strong Status:
-  = @container.status
+  strong State:
+  = @container.state
 
 = link_to 'Back', containers_path

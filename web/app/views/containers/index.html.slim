@@ -3,25 +3,17 @@ h1 Listing containers
 table
   thead
     tr
-      th Cid
-      th Port
-      th Host
-      th User
+      th CID
+      th Address
       th Gist
-      th Status
-      th
-      th
-      th
+      th User
+      th State
 
   tbody
     - @containers.each do |container|
       tr
-        td = container.cid
-        td = container.port
-        td = container.host
-        td = container.user
-        td = container.gist
-        td = container.status
-        td = link_to 'Show', container
-
-br
+        td = link_to container.short_cid, container
+        td = link_to container.address, container.address
+        td = link_to container.gist.name, container.gist
+        td = container.user.name
+        td = container.state

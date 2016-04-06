@@ -1,8 +1,11 @@
 p#notice = notice
 
-
-h3= @gist.name
-| by #{@gist.user.name}
+.row
+  .column
+    h3= @gist.name
+    | by #{@gist.user.name}
+  .column
+    = button_to "Start", start_gist_path(@gist)
 
 pre
   code= @gist.content

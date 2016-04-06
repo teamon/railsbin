@@ -40,6 +40,13 @@ class GistsController < ApplicationController
     redirect_to gists_url, notice: 'Gist was successfully destroyed.'
   end
 
+  def start
+    gist = current_user.gists.find(params[:id])
+    container = StartGistContainer.new.call(gist, current_user)
+
+    redirect_to container
+  end
+
   private
 
   def gist_params
