@@ -7,7 +7,13 @@ Rails.application.routes.draw do
       post :start
     end
   end
-  resources :containers, only: [:index, :show]
+  resources :containers, only: [:index, :show] do
+    member do
+      post :stop
+    end
+  end
+
+  get :dashboard, to: "home#dashboard"
 
   root to: "home#index"
 end

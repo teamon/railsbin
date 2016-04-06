@@ -68,7 +68,13 @@ module Runner
       segment ":id" do
         get do
           container = Docker::Container.get(params[:id])
-          container.json
+          data = container.json
+
+          {
+            id:         container.id,
+            state:      data["State"]["Status"],
+            exit_code:  data["State"]["ExitCode"]
+          }
         end
 
         post :stop do

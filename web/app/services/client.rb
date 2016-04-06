@@ -18,7 +18,7 @@ class Client
   end
 
   def stop(cid)
-    connection.post("containers/#{cid}").body
+    connection.post("containers/#{cid}/stop").body
   end
 
   protected

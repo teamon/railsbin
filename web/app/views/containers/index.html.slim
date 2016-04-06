@@ -8,6 +8,7 @@ table
       th Gist
       th User
       th State
+      th
 
   tbody
     - @containers.each do |container|
@@ -17,3 +18,5 @@ table
         td = link_to container.gist.name, container.gist
         td = container.user.name
         td = container.state
+        td
+          = button_to "Stop", stop_container_path(container)
