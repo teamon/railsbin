@@ -1,8 +1,9 @@
 var path    = require("path")
 var webpack = require("webpack")
+var extract = require("extract-text-webpack-plugin")
 
 module.exports = {
-  devtool: "cheap-module-eval-source-map",
+  devtool: "cheap-module-source-map",
   entry: [
     "webpack-hot-middleware/client",
     path.join(__dirname, "app/assets/javascripts/index.js"),
@@ -14,7 +15,8 @@ module.exports = {
     publicPath: "/assets/"
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new extract("[name].css")
   ],
   module: {
     loaders: [
@@ -25,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loaders: ["style", "css"]
+        loader: extract.extract("style-loader", "css-loader")
       }
     ]
   }
