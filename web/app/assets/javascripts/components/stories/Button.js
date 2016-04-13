@@ -1,14 +1,14 @@
 import React from "react"
 import Button from "../Button"
-import { storiesOf, action } from "@kadira/storybook"
+import { storiesOf, action, linkTo } from "@kadira/storybook"
 
 storiesOf('Button', module)
-  .add('basic', () => {
-    const handleOnClick = function(){
-      alert("It works!")
-    }
-
-    return (
-      <Button label="Click me" onClick={handleOnClick}/>
-    )
-  })
+  .add('default', () =>
+    <div className="container">
+      <Button label="Click me" onClick={action('click the button')}/>
+      {" "}
+      <Button label="Click me" className="button button-outline" onClick={action('click the button')}/>
+      {" "}
+      <Button label="Click me" className="button button-clear" onClick={action('click the button')}/>
+    </div>
+  )
