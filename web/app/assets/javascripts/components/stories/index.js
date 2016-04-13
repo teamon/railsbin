@@ -3,9 +3,10 @@ import { storiesOf, action, linkTo } from "@kadira/storybook"
 
 import Button from "../Button"
 import BrowserFrame from "../BrowserFrame"
+import BrowserToolbar from "../BrowserToolbar"
 
-storiesOf('Button', module)
-  .add('default', () =>
+storiesOf("Button", module)
+  .add("default", () =>
     <div className="container">
       <Button label="Click me" onClick={action('click the button')}/>
       {" "}
@@ -15,9 +16,16 @@ storiesOf('Button', module)
     </div>
   )
 
-storiesOf('BrowserFrame', module)
-  .add('default', () =>
+storiesOf("BrowserFrame", module)
+  .add("default", () =>
     <div className="container">
       <BrowserFrame url="http://teamon.eu"/>
+    </div>
+  )
+
+storiesOf("BrowserToolbar", module)
+  .add("default", () =>
+    <div className="container">
+      <BrowserToolbar/>
     </div>
   )
