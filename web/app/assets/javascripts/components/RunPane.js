@@ -1,15 +1,32 @@
 import React from "react"
 
-import RunToolbar from "./RunToolbar"
-import Browser    from "./Browser"
+import RunToolbar       from "./RunToolbar"
+import BrowserToolbar   from "./BrowserToolbar"
+import BrowserFrame     from "./BrowserFrame"
 
 export default class RunPane extends React.Component {
+  static propTypes = {
+    gist:     React.PropTypes.object.isRequired,
+    browser:  React.PropTypes.object.isRequired,
+
+    actions:  React.PropTypes.object.isRequired
+  }
   render(){
-    const {state, endpoint} = this.props
+    const {gist, browser, actions} = this.props
+
+    console.log(actions)
 
     return <div>
-      <RunToolbar state={state}/>
-      <Browser endpoint={endpoint}/>
+      <RunToolbar
+        state={gist.state}
+        {...actions}/>
+      <BrowserToolbar
+        endpoint={gist.endpoint}
+        path={browser.path}
+        onPathChange={actions.browserLoad}/>
+      <BrowserFrame
+        endpoint={gist.endpoint}
+        path={browser.path}/>
     </div>
   }
 }

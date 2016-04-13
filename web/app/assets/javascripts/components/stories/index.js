@@ -2,9 +2,14 @@ import React from "react"
 import { storiesOf, action, linkTo } from "@kadira/storybook"
 
 import Button         from "../Button"
-import Browser        from "../Browser"
+import BrowserFrame   from "../BrowserFrame"
+import BrowserToolbar from "../BrowserToolbar"
 import RunToolbar     from "../RunToolbar"
 import RunPane        from "../RunPane"
+import GistView       from "../GistView"
+import Editor         from "../Editor"
+import EditorToolbar  from "../EditorToolbar"
+import EditorPane     from "../EditorPane"
 
 storiesOf("Button", module)
   .add("default", () =>
@@ -17,34 +22,112 @@ storiesOf("Button", module)
     </div>
   )
 
-storiesOf("Browser", module)
+storiesOf("BrowserFrame", module)
   .add("default", () =>
     <div className="container">
-      <Browser endpoint={"httpbin.org"}/>
+      <BrowserFrame endpoint={"httpbin.org"} path="ip"/>
+    </div>
+  )
+
+storiesOf("BrowserToolbar", module)
+  .add("default", () =>
+    <div className="container">
+      <BrowserToolbar
+        endpoint={"httpbin.org"}
+        path="ip"
+        onPathChange={action("browserLoad")}/>
     </div>
   )
 
 storiesOf("RunToolbar", module)
-  .add("initial", () =>
-    <div className="container">
-      <RunToolbar state="new"/>
-    </div>
-  )
-  .add("running", () =>
-    <div className="container">
-      <RunToolbar state="running"/>
-    </div>
-  )
+  .add("initial", () => setupRunToolbar("new"))
+  .add("running", () => setupRunToolbar("running"))
 
+function setupRunToolbar(state){
+  return <div className="container">
+    <RunToolbar state={state}
+      gistStart={action("gistStart")}
+      gistStop={action("gistStop")}
+      gistRestart={action("gistRestart")}/>
+  </div>
+}
 
 storiesOf("RunPane", module)
-  .add("initial", () =>
+  .add("initial", () => setupRunPane("new"))
+  .add("running", () => setupRunPane("running"))
+
+function setupRunPane(state){
+  const gist    = makeGist({state})
+  const browser = makeBrowser()
+  const actions = makeActions()
+
+  return <div className="container">
+    <RunPane gist={gist} browser={browser} actions={actions}/>
+  </div>
+}
+
+storiesOf("GistView", module)
+  .add("initial", () => setupGistView("new"))
+
+function setupGistView(state){
+  const gist    = makeGist({state})
+  const browser = makeBrowser()
+  const actions = makeActions()
+
+  return <div className="container">
+    <GistView gist={gist} browser={browser} actions={actions}/>
+  </div>
+}
+
+storiesOf("Editor", module)
+  .add("default", () =>
     <div className="container">
-      <RunPane state="new" endpoint="httpbin.org"/>
+      <Editor content="Hello world"/>
     </div>
   )
-  .add("running", () =>
+
+storiesOf("EditorToolbar", module)
+  .add("default", () =>
     <div className="container">
-      <RunPane state="running" endpoint="httpbin.org"/>
+      <EditorToolbar gistUpdate={action("gistUpdate")}/>
     </div>
   )
+
+storiesOf("EditorPane", module)
+  .add("default", () => setupEditorPane())
+
+function setupEditorPane(state){
+  const gist    = makeGist({state})
+  const actions = makeActions()
+
+  return <div className="container">
+    <EditorPane gist={gist} actions={actions}/>
+  </div>
+}
+
+function makeGist(attrs = {}){
+  return Object.assign({}, {
+    uid: "xyz123",
+    name: "Hello World",
+    content: "some code here",
+    state: "new",
+    endpoint: "httpbin.org:80"
+  }, attrs)
+}
+
+function makeBrowser(attrs = {}){
+  return Object.assign({}, {
+    path: "ip"
+  }, attrs)
+}
+
+function makeActions(){
+  return {
+    gistStart:    action("gistStart"),
+    gistStop:     action("gistStop"),
+    gistRestart:  action("gistRestart"),
+    gistUpdate:   action("gistUpdate"),
+    browserLoad:  action("browserLoad")
+  }
+}
+

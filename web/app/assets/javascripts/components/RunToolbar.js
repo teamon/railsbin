@@ -4,7 +4,11 @@ import Button from "./Button"
 
 export default class RunToolbar extends React.Component {
   static propTypes = {
-    state: React.PropTypes.string.isRequired
+    state: React.PropTypes.string.isRequired,
+
+    gistStart:    React.PropTypes.func.isRequired,
+    gistStop:     React.PropTypes.func.isRequired,
+    gistRestart:  React.PropTypes.func.isRequired
   }
 
   render(){
@@ -26,14 +30,14 @@ export default class RunToolbar extends React.Component {
   }
 
   renderButtonStart(){
-    return <Button label="Start" onClick={this.handleStart}/>
+    return <Button label="Start" onClick={this.props.gistStart}/>
   }
 
   renderButtonStop(){
-    return <Button label="Stop" onClick={this.handleStop}/>
+    return <Button label="Stop" onClick={this.props.gistStop}/>
   }
 
   renderButtonRestart(){
-    return <Button label="Restart" onClick={this.handleRestart}/>
+    return <Button label="Restart" onClick={this.props.gistRestart}/>
   }
 }

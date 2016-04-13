@@ -23,6 +23,8 @@
     "babel-preset-stage-1": "^6.5.0",
     "milligram": "^1.1.0",
     "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.4",
+    "redux": "^3.4.0"
   }
 }
