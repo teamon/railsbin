@@ -1,7 +1,5 @@
 import React from "react"
 
-import BrowserToolbar from "./BrowserToolbar"
-import BrowserFrame from "./BrowserFrame"
 
 export default class Browser extends React.Component {
   static propTypes = {
@@ -11,23 +9,46 @@ export default class Browser extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {path: ""}
+    this.state = { path: "" }
   }
 
-  handlePathChange = (path) => {
-    this.setState({path: path})
+  componentDidMount(){
+    this.loadURL()
+  }
+
+  handlePathChange = (event) => {
+    this.setState({path: event.target.value})
+  }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    this.loadURL()
+  }
+
+  loadURL(){
+    this.setState({url: `http://${this.props.endpoint}/${this.state.path}`})
   }
 
   render(){
-    const url = `http://${this.props.endpoint}/${this.state.path}`
-
     return (
       <div>
-        <BrowserToolbar
-          endpoint={this.props.endpoint}
-          path={this.state.path}
-          onPathChange={this.handlePathChange}/>
-        <BrowserFrame url={url}/>
+        <form onSubmit={this.handleFormSubmit} className="row">
+          <div className="column column-30">
+            <label>http://{this.props.endpoint}/</label>
+          </div>
+          <div className="column column-60">
+            <input
+              type="text"
+              placeholder="some-path"
+              value={this.state.path}
+              onChange={this.handlePathChange}/>
+          </div>
+          <div className="column column-10">
+            <input type="submit" value="Go"/>
+          </div>
+        </form>
+
+        <iframe src={this.state.url}/>
       </div>
     )
   }
