@@ -5,7 +5,8 @@ module.exports = {
   devtool: "cheap-module-eval-source-map",
   entry: [
     "webpack-hot-middleware/client",
-    path.join(__dirname, "app/assets/javascripts/index")
+    path.join(__dirname, "app/assets/javascripts/index.js"),
+    path.join(__dirname, "app/assets/stylesheets/index.css")
   ],
   output: {
     path: path.join(__dirname, "public/assets"),
@@ -21,6 +22,10 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.css?$/,
+        loaders: ["style", "css"]
       }
     ]
   }
