@@ -1,0 +1,8 @@
+{
+  "name": "railsbin-web",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "webpack": "^1.12.15"
+  }
+}
