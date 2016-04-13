@@ -1,9 +1,10 @@
 import React from "react"
 import { storiesOf, action, linkTo } from "@kadira/storybook"
 
-import Button from "../Button"
-import BrowserFrame from "../BrowserFrame"
+import Button         from "../Button"
+import BrowserFrame   from "../BrowserFrame"
 import BrowserToolbar from "../BrowserToolbar"
+import Browser        from "../Browser"
 
 storiesOf("Button", module)
   .add("default", () =>
@@ -19,13 +20,23 @@ storiesOf("Button", module)
 storiesOf("BrowserFrame", module)
   .add("default", () =>
     <div className="container">
-      <BrowserFrame url="http://teamon.eu"/>
+      <BrowserFrame url="http://httpbin.org"/>
     </div>
   )
 
 storiesOf("BrowserToolbar", module)
   .add("default", () =>
     <div className="container">
-      <BrowserToolbar/>
+      <BrowserToolbar
+        endpoint="httpbin.org"
+        path="api/v1/uers.json"
+        onPathChange={action('path changed')}/>
+    </div>
+  )
+
+storiesOf("Browser", module)
+  .add("default", () =>
+    <div className="container">
+      <Browser endpoint={"httpbin.org"}/>
     </div>
   )
