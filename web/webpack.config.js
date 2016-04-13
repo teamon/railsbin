@@ -1,21 +1,26 @@
-var path = require("path")
+var path    = require("path")
+var webpack = require("webpack")
 
 module.exports = {
+  devtool: "cheap-module-eval-source-map",
   entry: [
+    "webpack-hot-middleware/client",
     path.join(__dirname, "app/assets/javascripts/index")
   ],
   output: {
-    path: "public/assets",
+    path: path.join(__dirname, "public/assets"),
     filename: "[name].js",
     publicPath: "/assets/"
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ["babel-loader"],
-        exclude: /node_modules/,
-        include: __dirname
+        loader: "babel-loader",
+        exclude: /node_modules/
       }
     ]
   }

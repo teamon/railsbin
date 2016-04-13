@@ -1,1 +1,1 @@
-alert(1)
+import Button from "./components/Button"
