@@ -2,8 +2,10 @@ doctype html
 html
   head
     title Web
-    link href="/assets/main.css" rel="stylesheet"
-    = javascript_include_tag "/assets/main"
+    = stylesheet_link_tag "/assets/lib"
+    = stylesheet_link_tag "/assets/app"
+    = javascript_include_tag "/assets/lib"
+    = javascript_include_tag "/assets/app"
     = csrf_meta_tags
   body
     = notice
