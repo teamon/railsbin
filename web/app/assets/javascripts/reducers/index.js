@@ -1,17 +1,8 @@
 import { combineReducers } from "redux"
 
-const mock = {
-  uid: "xyz123",
-  name: "Hello World",
-  content: "some code here",
-  state: "running",
-  endpoint: "localhost:12345"
-}
-
-function gistReducer(state = mock, action){
+function gistReducer(state = {}, action){
   return state
 }
-
 
 function browserReducer(state = {}, action){
   switch(action.type){
@@ -22,7 +13,7 @@ function browserReducer(state = {}, action){
   return state
 }
 
-export default const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   gist:     gistReducer,
   browser:  browserReducer
 })

@@ -1,8 +1,16 @@
 import React from "react"
+import { bindActionCreators } from 'redux'
+import { connect } from "react-redux"
 
-import EditorPane from "./EditorPane"
-import RunPane    from "./RunPane"
+import * as actions from "../actions"
 
+import EditorPane from "../components/EditorPane"
+import RunPane    from "../components/RunPane"
+
+@connect(
+  (state) => state,
+  (dispatch) => { return { actions: bindActionCreators(actions, dispatch) } }
+)
 export default class GistView extends React.Component {
   static propTypes = {
     gist:     React.PropTypes.object.isRequired,

@@ -2,15 +2,16 @@ doctype html
 html
   head
     title Web
-    link href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" rel="stylesheet"
-    link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"
-    link href="/milligram.css" rel="stylesheet"
+    link href="/assets/main.css" rel="stylesheet"
+    = javascript_include_tag "/assets/main"
     = csrf_meta_tags
   body
-    nav
-      .container
-        a> href=gists_path Gists
-        | |
-        a< href=containers_path Containers
+    = notice
+    = alert
+
+    nav.nav
+      .container.align-right
+        .nav-list
+          a.button.button-clear> href=gists_path My Gists
     .container
       = yield

@@ -1,47 +1,40 @@
 class GistsController < ApplicationController
   def index
-    @gists = current_user.gists.all
+    @dashboard = GistsDashboard.call(current_user)
   end
 
   def show
-    @gist = current_user.gists.find(params[:id])
+    gist = Gist.find_by!(uid: params[:uid])
+    @gist_data = GistRepresenter.render(gist)
   end
 
   def new
-    @gist = current_user.gists.new
   end
 
   def edit
-    @gist = current_user.gists.find(params[:id])
+    @gist = Gist.find(params[:uid])
   end
 
+  # API
   def create
-    @gist = current_user.gists.new(gist_params)
-
-    if @gist.save
-      redirect_to @gist, notice: 'Gist was successfully created.'
-    else
-      render :new
-    end
+    gist = CreateGist.call(current_user, gist_params)
+    render json: GistRepresenter.render(gist)
   end
 
+  # API
   def update
-    @gist = current_user.gists.find(params[:id])
-    if @gist.update(gist_params)
-      redirect_to @gist, notice: 'Gist was successfully updated.'
-    else
-      render :edit
-    end
+    gist = UpdateGist.call(current_user, params[:uid], gist_params)
+    render json: GistRepresenter.render(gist)
   end
 
   def destroy
-    gist = current_user.gists.find(params[:id])
+    gist = current_user.gists.find(params[:uid])
     gist.destroy
     redirect_to gists_url, notice: 'Gist was successfully destroyed.'
   end
 
   def start
-    gist = current_user.gists.find(params[:id])
+    gist = current_user.gists.find(params[:uid])
     container = StartGistContainer.new.call(gist, current_user)
 
     redirect_to container

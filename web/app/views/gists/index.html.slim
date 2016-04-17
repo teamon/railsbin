@@ -1,19 +1,20 @@
-h1 Listing gists
+.row
+  .column.column-50
+    h3 My Gists
+  .column.column-50.align-right
+    a.button href="new_gist_path" New Gist
 
 table
   thead
     tr
-      th ID
       th Name
-      th User
+      th Status
+      th Updated at
 
   tbody
-    - @gists.each do |gist|
+    - @dashboard.stopped.each do |gist|
       tr
-        td = link_to "##{gist.id}", gist
-        td = link_to gist.name, gist
-        td = gist.user.name
+        td= link_to gist.name, gist_path(gist.uid)
+        td= "gist.status"
+        td= "#{time_ago_in_words gist.updated_at} ago"
 
-br
-
-= link_to 'New Gist', new_gist_path

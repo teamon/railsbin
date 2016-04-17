@@ -15,7 +15,9 @@ module.exports = {
     publicPath: "/assets/"
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new extract("[name].css")
   ],
   module: {

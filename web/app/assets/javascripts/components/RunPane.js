@@ -14,19 +14,25 @@ export default class RunPane extends React.Component {
   render(){
     const {gist, browser, actions} = this.props
 
-    console.log(actions)
-
-    return <div>
-      <RunToolbar
-        state={gist.state}
-        {...actions}/>
-      <BrowserToolbar
-        endpoint={gist.endpoint}
-        path={browser.path}
-        onPathChange={actions.browserLoad}/>
-      <BrowserFrame
-        endpoint={gist.endpoint}
-        path={browser.path}/>
-    </div>
+    if(gist.state === "new"){
+      return <div>
+        <RunToolbar
+          state={gist.state}
+          {...actions}/>
+      </div>
+    } else {
+      return <div>
+        <RunToolbar
+          state={gist.state}
+          {...actions}/>
+        <BrowserToolbar
+          endpoint={gist.endpoint}
+          path={browser.path}
+          onPathChange={actions.browserLoad}/>
+        <BrowserFrame
+          endpoint={gist.endpoint}
+          path={browser.path}/>
+      </div>
+    }
   }
 }

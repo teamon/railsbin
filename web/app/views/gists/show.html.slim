@@ -1,15 +1,4 @@
-p#notice = notice
+div id="gist-view"
 
-.row
-  .column
-    h3= @gist.name
-    | by #{@gist.user.name}
-  .column
-    = button_to "Start", start_gist_path(@gist)
-
-pre
-  code= @gist.content
-
-= link_to 'Edit', edit_gist_path(@gist)
-'|
-= link_to 'Back', gists_path
+javascript:
+  Views.gist("gist-view", #{@gist_data.to_json.html_safe})
