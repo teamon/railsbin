@@ -24,3 +24,10 @@ group :development, :test do
   # documentation
   gem 'annotate'
 end
+
+group :test do
+  gem "guard"
+  gem "guard-minitest"
+
+  gem "minitest-reporters"
+end
