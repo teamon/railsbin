@@ -10,11 +10,13 @@ table
       th Name
       th Status
       th Updated at
+      th
 
   tbody
     - @dashboard.stopped.each do |gist|
       tr
-        td= link_to gist.name, gist_path(gist.uid)
+        td= link_to (gist.name.presence || gist.uid), gist_path(gist.uid)
         td= "gist.status"
         td= "#{time_ago_in_words gist.updated_at} ago"
+        td= button_to "Delete", gist_path(gist.uid), method: "delete"
 

@@ -33,8 +33,7 @@ class GistsController < ApplicationController
   end
 
   def destroy
-    gist = current_user.gists.find(params[:uid])
-    gist.destroy
+    DeleteGist.call(current_user, params[:uid])
     redirect_to gists_url, notice: 'Gist was successfully destroyed.'
   end
 
