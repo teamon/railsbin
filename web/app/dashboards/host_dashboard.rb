@@ -29,6 +29,6 @@ class HostDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(host)
-    "Host ##{host.address}"
+    "Host[#{host.address}]"
   end
 end

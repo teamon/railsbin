@@ -9,7 +9,5 @@
 #
 
 class Host < ActiveRecord::Base
-  has_many :containers
-
   validates :address, presence: true
 end

@@ -7,12 +7,6 @@ Rails.application.routes.draw do
       post :start
     end
   end
-  resources :containers, only: [:index, :show] do
-    member do
-      post :stop
-    end
-  end
-
 
   namespace :admin do
     resources :gists
@@ -21,10 +15,6 @@ Rails.application.routes.draw do
 
     root to: "hosts#index"
   end
-
-
-
-  get :dashboard, to: "home#dashboard"
 
   root to: "home#index"
 end
