@@ -14,7 +14,7 @@ export default class EditorPane extends React.Component {
     const onChange = (content) => actions.gistContentChange(gist.uid, content)
 
     return <div>
-      <EditorToolbar gistUpdate={actions.gistUpdate}/>
+      {/*<EditorToolbar gistUpdate={actions.gistUpdate}/>*/}
       <Editor content={gist.content} onChange={onChange}/>
     </div>
   }
