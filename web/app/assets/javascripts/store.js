@@ -1,8 +1,27 @@
-import { createStore } from "redux"
+import { createStore, applyMiddleware, compose } from "redux"
+import thunk from "redux-thunk"
 import { rootReducer } from "./reducers"
 
-export default function configureStore(initial = {}){
-  const store = createStore(rootReducer, initial)
+function locationMiddleware({dispatch, getState}){
+  return next => action => {
+    if(action.type == "LOCATION_CHANGE"){
+      window.history.pushState({}, "", action.location);
+    }
 
-  return store
+    return next(action);
+  }
+}
+
+export default function configureStore(initial = {}){
+  return createStore(
+    rootReducer,
+    initial,
+    compose(
+      applyMiddleware(
+        thunk,
+        locationMiddleware
+      ),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+  )
 }

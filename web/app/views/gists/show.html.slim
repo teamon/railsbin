@@ -1,4 +1,4 @@
 div id="gist-view"
 
 javascript:
-  Views.gist("gist-view", #{@gist_data.to_json.html_safe})
+  Views.gist(document.getElementById("gist-view"), #{@gist_data.to_json.html_safe})

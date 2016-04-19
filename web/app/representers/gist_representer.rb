@@ -3,9 +3,19 @@ class GistRepresenter
 
   def render(gist)
     {
-      id:       gist.id,
-      name:     gist.name,
-      content:  gist.content
+      uid:      gist.uid,
+      name:     gist.name.to_s,
+      content:  gist.content.to_s,
+      state:    "stopped"
+    }
+  end
+
+  def render_new
+    {
+      uid:      nil,
+      name:     "",
+      content:  "",
+      state:    "new"
     }
   end
 end

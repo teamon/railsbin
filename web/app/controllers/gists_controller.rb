@@ -6,9 +6,14 @@ class GistsController < ApplicationController
   def show
     gist = Gist.find_by!(uid: params[:uid])
     @gist_data = GistRepresenter.render(gist)
+
+    render :show
   end
 
   def new
+    @gist_data = GistRepresenter.render_new
+
+    render :show
   end
 
   def edit
@@ -43,6 +48,6 @@ class GistsController < ApplicationController
   private
 
   def gist_params
-    params.require(:gist).permit(:name, :content)
+    params.require(:gist).permit(:name, :content).symbolize_keys
   end
 end

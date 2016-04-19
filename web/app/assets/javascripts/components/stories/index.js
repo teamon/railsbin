@@ -6,10 +6,11 @@ import BrowserFrame   from "../BrowserFrame"
 import BrowserToolbar from "../BrowserToolbar"
 import RunToolbar     from "../RunToolbar"
 import RunPane        from "../RunPane"
-import GistView       from "../GistView"
 import Editor         from "../Editor"
 import EditorToolbar  from "../EditorToolbar"
 import EditorPane     from "../EditorPane"
+
+import GistView       from "../../containers/GistView"
 
 storiesOf("Button", module)
   .add("default", () =>
@@ -82,7 +83,7 @@ function setupGistView(state){
 storiesOf("Editor", module)
   .add("default", () =>
     <div className="container">
-      <Editor content="Hello world"/>
+      <Editor content="Hello world" onChange={(x) => console.log(x)}/>
     </div>
   )
 

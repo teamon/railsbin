@@ -8,7 +8,7 @@ import configureStore from "./store"
 
 
 window.Views = {
-  gist: function(id, gist){
+  gist: function(element, gist){
     let state = {
       gist: gist,
       browser: {}
@@ -24,7 +24,7 @@ window.Views = {
       <Provider store={store}>
         <GistView/>
       </Provider>,
-      document.getElementById(id)
+      element
     )
   }
 }

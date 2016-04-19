@@ -11,10 +11,11 @@ export default class EditorPane extends React.Component {
   }
   render(){
     const {gist, actions} = this.props
+    const onChange = (content) => actions.gistContentChange(gist.uid, content)
 
     return <div>
       <EditorToolbar gistUpdate={actions.gistUpdate}/>
-      <Editor content={gist.content}/>
+      <Editor content={gist.content} onChange={onChange}/>
     </div>
   }
 }

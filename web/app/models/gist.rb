@@ -20,5 +20,5 @@ class Gist < ActiveRecord::Base
   belongs_to :user
   has_many :containers
 
-  validates :name, :content, :user, presence: true
+  validates :content, :user, presence: true
 end

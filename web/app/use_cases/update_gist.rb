@@ -1,8 +1,9 @@
 class UpdateGist
   include UseCase
 
-  def call(user, uid, name:, content:)
+  def call(user, uid, content:, **_)
     gist = user.gists.find_by!(uid: uid)
-    gist.update!(name: name, content: content)
+    gist.update!(content: content)
+    gist
   end
 end

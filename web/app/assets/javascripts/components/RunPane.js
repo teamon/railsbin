@@ -14,7 +14,7 @@ export default class RunPane extends React.Component {
   render(){
     const {gist, browser, actions} = this.props
 
-    if(gist.state === "new"){
+    if(gist.state != "running"){
       return <div>
         <RunToolbar
           state={gist.state}

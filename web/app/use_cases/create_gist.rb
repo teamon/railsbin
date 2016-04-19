@@ -8,8 +8,8 @@ class CreateGist
     @generator = generator
   end
 
-  def call(user, name:, content:)
-    gist = user.gists.new(name: name, content: content)
+  def call(user, content:, **_)
+    gist = user.gists.new(content: content)
     generate_uid_and_save(gist)
     gist
   end
