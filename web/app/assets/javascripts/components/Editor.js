@@ -1,6 +1,11 @@
 import React from "react"
 import debounce from "../utils/debounce"
 
+import AceEditor from "react-ace"
+import brace from 'brace';
+import "brace/mode/ruby"
+import "brace/theme/xcode"
+
 export default class Editor extends React.Component {
   static propTypes = {
     content:  React.PropTypes.string.isRequired,
@@ -22,13 +27,20 @@ export default class Editor extends React.Component {
     this.onChange = debounce(props.onChange, 300)
   }
 
-  handleContentChange = (event) => {
-    let content = event.target.value;
+  handleContentChange = (content) => {
     this.setState({content: content});
     this.onChange(content)
   }
 
   render(){
-    return <textarea value={this.state.content} onChange={this.handleContentChange}/>
+    return <AceEditor
+      name="editor-ace"
+      mode="ruby"
+      theme="xcode"
+      tabSize={2}
+      value={this.state.content}
+      onChange={this.handleContentChange}
+      editorProps={{$blockScrolling: true}}
+    />
   }
 }
