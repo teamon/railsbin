@@ -4,7 +4,7 @@ export default class BrowserToolbar extends React.Component {
   static propTypes = {
     endpoint:     React.PropTypes.string.isRequired,
     path:         React.PropTypes.string.isRequired,
-    onPathChange: React.PropTypes.fun
+    onPathChange: React.PropTypes.func
   }
 
   constructor(props){

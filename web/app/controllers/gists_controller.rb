@@ -37,11 +37,23 @@ class GistsController < ApplicationController
     redirect_to gists_url, notice: 'Gist was successfully destroyed.'
   end
 
-  def start
-    gist = current_user.gists.find(params[:uid])
-    container = StartGistContainer.new.call(gist, current_user)
 
-    redirect_to container
+  # API
+  def start
+    gist = StartContainer.call(current_user, params[:uid])
+    render json: GistRepresenter.render_state(gist)
+  end
+
+  # API
+  def stop
+    gist = StopContainer.call(current_user, params[:uid])
+    render json: GistRepresenter.render_state(gist)
+  end
+
+  # API
+  def restart
+    gist = RestartContainer.call(current_user, params[:uid])
+    render json: GistRepresenter.render_state(gist)
   end
 
   private

@@ -4,18 +4,32 @@ export function browserLoad(url){
   return { type: "BROWSER_LOAD", url }
 }
 
+function gistLifecycle(uid, event){
+  return dispatch => {
+    console.log(uid)
+
+    return api.gists[event](uid).then(({data}) => {
+      dispatch(gistStateUpdate(data))
+    })
+  }
+}
+
 export function gistStart(uid){
-  return { type: "GIST_START", uid }
+  return gistLifecycle(uid, "start");
 }
 export function gistStop(uid){
-  return { type: "GIST_STOP", uid }
+  return gistLifecycle(uid, "stop");
 }
 export function gistRestart(uid){
-  return { type: "GIST_RESTART", uid }
+  return gistLifecycle(uid, "restart");
 }
 
 export function gistUpdate(data){
   return { type: "GIST_UPDATE", data }
+}
+
+export function gistStateUpdate(data){
+  return { type: "GIST_STATE_UPDATE", data }
 }
 
 export function locationChange(location){

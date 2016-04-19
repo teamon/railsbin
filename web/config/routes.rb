@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :gists, param: :uid do
     member do
       post :start
+      post :stop
+      post :restart
     end
   end
 

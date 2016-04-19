@@ -11,12 +11,8 @@ window.Views = {
   gist: function(element, gist){
     let state = {
       gist: gist,
-      browser: {}
+      browser: { path: "" }
     }
-
-    // TODO: Temporary
-    state.gist.state = "new"
-    // ---
 
     let store = configureStore(state)
 

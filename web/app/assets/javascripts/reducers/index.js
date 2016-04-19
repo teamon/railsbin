@@ -3,6 +3,7 @@ import { combineReducers } from "redux"
 function gistReducer(state = {}, action){
   switch(action.type){
     case "GIST_UPDATE":
+    case "GIST_STATE_UPDATE":
       return {
         ...state,
         ...action.data
@@ -16,7 +17,7 @@ function browserReducer(state = {}, action){
     case "BROWSER_LOAD":
       return {
         ...state,
-        url: action.url
+        path: action.url
       }
   }
 
