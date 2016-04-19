@@ -13,6 +13,17 @@ Rails.application.routes.draw do
     end
   end
 
+
+  namespace :admin do
+    resources :gists
+    resources :hosts
+    resources :users
+
+    root to: "hosts#index"
+  end
+
+
+
   get :dashboard, to: "home#dashboard"
 
   root to: "home#index"

@@ -13,6 +13,10 @@ gem 'omniauth-github'
 gem 'faraday',            '~> 0.9.0'
 gem 'faraday_middleware'
 
+# back office
+gem "administrate", "~> 0.1.5"
+
+
 group :development, :test do
   # debugging
   gem 'pry-rails'
