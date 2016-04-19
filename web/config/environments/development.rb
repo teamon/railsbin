@@ -25,4 +25,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Set localhost:8080 as host to make redirects work well with webpack dev server
+  config.action_controller.default_url_options = { port: 8080 }
 end
