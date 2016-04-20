@@ -15,6 +15,7 @@ namespace :build do
       SH
 
       sh <<-SH
+        sudo chown -R $USER .bundle
         docker build -t teamon/railsbin-web .
       SH
     end
