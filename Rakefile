@@ -8,7 +8,7 @@ namespace :build do
   task :web do
     Dir.chdir("web") do
       sh <<-SH
-        docker run --rm -it -v #{Dir.pwd}:/app -w /app iron/ruby:dev sh -c '\
+        docker run -it -v #{Dir.pwd}:/app -w /app iron/ruby:dev sh -c '\
           bundle config --local build.nokogiri --use-system-libraries && \
           bundle install --path .bundle --clean --deployment \
                          --without development test --jobs 4'
