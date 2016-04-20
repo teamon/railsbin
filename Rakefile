@@ -6,6 +6,18 @@ namespace :build do
 
   desc "Build teamon/railsbin-web docker image"
   task :web do
+    Rake::Task["build:build_with_ruby"].invoke
+    Rake::Task["build:build_with_node"].invoke
+
+    Dir.chdir("web") do
+      sh <<-SH
+        sudo chown -R $USER .bundle
+        docker build -t teamon/railsbin-web .
+      SH
+    end
+  end
+
+  task :build_with_ruby do
     Dir.chdir("web") do
       sh <<-SH
         docker run -it -v #{Dir.pwd}:/app -w /app iron/ruby:dev sh -c '\
@@ -13,10 +25,15 @@ namespace :build do
           bundle install --path .bundle --clean --deployment \
                          --without development test --jobs 4'
       SH
+    end
+  end
 
+  task :build_with_node do
+    Dir.chdir("web") do
       sh <<-SH
-        sudo chown -R $USER .bundle
-        docker build -t teamon/railsbin-web .
+        docker run -it -v #{Dir.pwd}:/app -w /app iron/node:dev sh -c '\
+          npm install && \
+          ./node_modules/.bin/webpack -p'
       SH
     end
   end
