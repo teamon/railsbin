@@ -6,7 +6,6 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: {
     app: [
-      "webpack-hot-middleware/client",
       path.join(__dirname, "app/assets/javascripts/index.js"),
       path.join(__dirname, "app/assets/stylesheets/index.css")
     ],
@@ -40,4 +39,8 @@ module.exports = {
       }
     ]
   }
+}
+
+if(process.env.NODE_ENV !== "production"){
+  module.exports.entry.app.unshift("webpack-hot-middleware/client")
 }

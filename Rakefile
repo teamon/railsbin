@@ -31,7 +31,7 @@ namespace :build do
   task :build_with_node do
     Dir.chdir("web") do
       sh <<-SH
-        docker run -it -v #{Dir.pwd}:/app -w /app iron/node:dev sh -c '\
+        docker run -it -v #{Dir.pwd}:/app -w /app -e NODE_ENV=production iron/node:dev sh -c '\
           npm install && \
           ./node_modules/.bin/webpack -p'
       SH
